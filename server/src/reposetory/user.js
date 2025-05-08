@@ -9,5 +9,4 @@ const SighinDb = (user) => {
     return User.create(user)
 }
 
-
 module.exports = { LoginDb, SighinDb };

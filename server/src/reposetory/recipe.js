@@ -3,11 +3,13 @@ const Instructions = require("../model/instructions");
 const Recipe = require("../model/recipe");
 
 const GetRecipeDb = async (Id) => {
-   return Recipe.findOne({ where: { Id }, include: [Ingridents, Instructions] });
+    return Recipe.findOne({ where: { Id }, include: [Ingridents, Instructions] });
 }
+
 const GetRecipesDb = () => {
     return Recipe.findAll({ include: [Ingridents, Instructions] });
 }
+
 const AddRecipyDB = async (recipy) => {
     return await Recipe
         .create(recipy, {
@@ -23,6 +25,5 @@ const EditRecipyDb = async (recipe) => {
 const DeleteDb = (Id) => {
     return Recipe.destroy({ where: { Id } })
 }
-
 
 module.exports = { GetRecipeDb, AddRecipyDB, EditRecipyDb, DeleteDb, GetRecipesDb }

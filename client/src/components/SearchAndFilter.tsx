@@ -4,12 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useRecipes } from "../use-Context/recipeProvider";
 import { useCategories } from "../use-Context/categoryProvider";
 
-const categories = [
-    { id: 1, name: "עוגיות ומאפים אישיים" },
-    { id: 2, name: "עוגות קלאסיות" },
-    { id: 3, name: "עוגות ויטרינה" },
-];
-
 const difficulties = [
     { id: 1, name: "קל" },
     { id: 2, name: "בינוני" },
@@ -17,16 +11,17 @@ const difficulties = [
 ];
 
 const SearchAndFilter = () => {
-    const { categories, setCategories } = useCategories();
+    const { categories } = useCategories(); // משתמשים רק ב- useCategories
     const [filterType, setFilterType] = useState(""); // סוג הסינון שנבחר
     const [filterValue, setFilterValue] = useState(""); // הערך שנבחר לסינון
     const [openSearch, setOpenSearch] = useState(false); // מציין אם התיבה פתוחה או סגורה
     const { recipes, setRecipes } = useRecipes();
 
+    // פונקציה שמבצעת סינון על המתכונים
     const filterRecipes = () => {
         return recipes.filter((recipe) => {
             if (filterType === "difficulty" && filterValue) {
-                return String(recipe?.Difficulty) === String(filterValue);
+                return recipe?.Difficulty === Number(filterValue); // סינון לפי id של הקושי
             }
             if (filterType === "duration" && filterValue) {
                 return recipe?.Duration <= Number(filterValue);
@@ -34,14 +29,18 @@ const SearchAndFilter = () => {
             if (filterType === "createdBy" && filterValue) {
                 return recipe?.UserId === Number(filterValue);
             }
+            if (filterType === "category" && filterValue) {
+                return String(recipe?.Difficulty) === String(filterValue);
+            }
             return true;
         });
     };
 
+
     const handleSearch = () => {
         const filteredRecipes = filterRecipes();
         setRecipes(filteredRecipes);
-        filteredRecipes.length === 0 && alert("לא נמצאו מתכונים מתאימים לחיפוש") ;
+        filteredRecipes.length === 0 && alert("לא נמצאו מתכונים מתאימים לחיפוש");
         console.log("מתכונים מפולטרים:", filteredRecipes);
     };
 
@@ -57,7 +56,7 @@ const SearchAndFilter = () => {
                     borderRadius: 2,
                     transition: "0.3s",
                     "&:hover": { backgroundColor: "#fff", color: "#444" },
-                    borderColor: "#444", 
+                    borderColor: "#444",
                     backgroundColor: "#444",
                     color: "#fff"
                 }}
@@ -106,11 +105,12 @@ const SearchAndFilter = () => {
                                 sx={{ "& .MuiSelect-select": { color: "#444" }, "& .MuiOutlinedInput-root": { "& fieldset": { borderColor: "#444" } } }}
                             >
                                 {difficulties.map((diff) => (
-                                    <MenuItem key={diff.id} value={diff.name}>{diff.name}</MenuItem>
+                                    <MenuItem key={diff.id} value={diff.id}>{diff.name}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
                     )}
+
                     {filterType === "duration" && (
                         <TextField
                             fullWidth
@@ -125,6 +125,7 @@ const SearchAndFilter = () => {
                             }}
                         />
                     )}
+
                     {filterType === "createdBy" && (
                         <TextField
                             fullWidth
@@ -138,6 +139,7 @@ const SearchAndFilter = () => {
                             }}
                         />
                     )}
+
                     <Button
                         fullWidth
                         variant="contained"
@@ -149,8 +151,8 @@ const SearchAndFilter = () => {
                             fontWeight: "bold",
                             borderRadius: 2,
                             transition: "0.3s",
-                            backgroundColor: "#333", 
-                            "&:hover": { backgroundColor: "#333" }, 
+                            backgroundColor: "#333",
+                            "&:hover": { backgroundColor: "#333" },
                             "&:disabled": { backgroundColor: "#ccc" },
                         }}
                     >

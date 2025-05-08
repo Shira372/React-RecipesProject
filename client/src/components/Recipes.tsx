@@ -11,6 +11,7 @@ import cookiesImg from '../images/cookies.webp';
 import { useRecipes } from '../use-Context/recipeProvider';
 import { Ingredient } from '../moduls/ingredient';
 
+
 //mui עיצוב מותאם אישית לכרטיסים בשיתוף 
 const PageContainer = styled('div')({
   padding: '20px',
@@ -144,7 +145,6 @@ const Recipe = () => {
                   </li>
                 ))}
               </ul>
-
               {/* הכפתורים יופיעו בתוך כל כרטיס בנפרד */}
               <CardActionsStyled>
                 <CustomButton size="small" onClick={() => delRecipe(recipe)}>

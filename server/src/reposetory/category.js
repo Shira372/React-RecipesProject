@@ -1,11 +1,11 @@
 const Category = require('../model/category')
 
 const GetCategoryDb = () => {
-    return Category.findAll();
+  return Category.findAll();
 }
 
 const AddCategoryDb = (Name) => {
-  return  Category.create({ Name })
+  return Category.create({ Name })
 }
 
 module.exports = { GetCategoryDb, AddCategoryDb }

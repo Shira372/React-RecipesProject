@@ -13,7 +13,7 @@ const Recipe = sequelize.define('recipe', {
     Name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true  
     },
     Img: {
         type: DataTypes.TEXT,

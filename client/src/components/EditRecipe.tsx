@@ -139,7 +139,7 @@ const EditRecipe = () => {
       Duration: data.Duration,
       Description: data.Description,
       Difficulty: data.Difficulty,
-      CategoryId: data.Category, 
+      Categoryid: data.Category, 
       Img: data.Img,
       Ingredients: mappedIngredients,
     };

@@ -9,5 +9,4 @@ route.post('/', recipe.AddRecipy);
 route.post('/edit', recipe.EditRecipy);
 route.post('/delete/:Id', recipe.Delete);
 
-
 module.exports = route;

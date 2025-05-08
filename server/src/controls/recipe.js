@@ -8,7 +8,6 @@ const GetAllRecipe = (_req, res) => {
                 return res.status(400).send(err?.errors[0]?.message)
             }
             return res.status(400).send(err)
-
         })
 }
 
@@ -16,7 +15,7 @@ const GetRecipe = (req, res) => {
     const { Id } = req.params;
     GetRecipeDb(Id)
         .then(x => res.send(x))
-        .catch(err =>{
+        .catch(err => {
             if (err?.errors[0]) {
                 return res.status(400).send(err?.errors[0]?.message)
             }
@@ -27,16 +26,16 @@ const GetRecipe = (req, res) => {
 
 const AddRecipy = (req, res) => {
     const {
-        Name, UserId, CategoryId, Img, Duration, Difficulty, Description,
+        Name, UserId, Categoryid, Img, Duration, Difficulty, Description,
         Ingridents, Instructions } = req.body;
-   
-    if (!Name || !UserId || !CategoryId || !Img || !Duration || !Difficulty || !Description || !Ingridents || !Instructions) {
+
+    if (!Name || !UserId || !Categoryid || !Img || !Duration || !Difficulty || !Description || !Ingridents || !Instructions) {
         // לא נשלח מידע
         return res.status(400).send('המידע שנשלח לא תקין')
     };
 
     const newRecipe = {
-        Name, UserId, CategoryId, Img, Duration, Difficulty, Description,
+        Name, UserId, Categoryid, Img, Duration, Difficulty, Description,
         Ingridents, Instructions
     };
     AddRecipyDB(newRecipe)
@@ -46,23 +45,22 @@ const AddRecipy = (req, res) => {
                 return res.status(400).send(err?.errors[0]?.message)
             }
             return res.status(400).send(err)
-
         })
 
 }
 
 const EditRecipy = (req, res) => {
     const { Id,
-        Name, UserId, CategoryId, Img, Duration, Difficulty, Description,
+        Name, UserId, Categoryid, Img, Duration, Difficulty, Description,
         Ingridents, Instructions } = req.body;
 
-    if (!Id || !Name || !UserId || !CategoryId || !Img || !Duration || !Difficulty || !Description || !Ingridents || !Instructions) {
+    if (!Id || !Name || !UserId || !Categoryid || !Img || !Duration || !Difficulty || !Description || !Ingridents || !Instructions) {
         // לא נשלח מידע
         return res.status(400).send('המידע שנשלח לא תקין')
     };
 
     const updateRecipe = {
-        Id, Name, CategoryId, Img, Duration, Difficulty,
+        Id, Name, Categoryid, Img, Duration, Difficulty,
         Description, Ingridents, Instructions
     };
     EditRecipyDb(updateRecipe)
@@ -81,7 +79,7 @@ const Delete = (req, res) => {
     const { Id } = req.params;
     DeleteDb(Id)
         .then(_ => res.send('ok'))
-        .catch(err =>{
+        .catch(err => {
             if (err?.errors[0]) {
                 return res.status(400).send(err?.errors[0]?.message)
             }

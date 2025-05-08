@@ -24,8 +24,9 @@ const Sighin = (req, res) => {
 
     if (!UserName || !Name || !Password || !Phone || !Email || !Tz) {
         // לא נשלח מידע
-        return res.status(400).send('לא מולאו כל הפרטים')
+        return res.status(400).send('לא מולאו כל הפרטים');
     };
+
     SighinDb({ UserName, Password, Name, Phone, Email, Tz })
         .then(newUser => res.send(newUser))
         .catch(err => {
@@ -33,7 +34,6 @@ const Sighin = (req, res) => {
                 return res.status(400).send(err?.errors[0]?.message)
             }
             return res.status(400).send(err)
-
         })
 }
 

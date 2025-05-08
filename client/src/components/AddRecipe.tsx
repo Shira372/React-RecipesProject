@@ -124,9 +124,9 @@ const AddRecipeForm = () => {
       Difficulty: data.Difficulty,
       Duration: data.Duration,
       Description: data.Description,
-      CategoryId: Number(data.Category),
+      Categoryid: Number(data.Category),
       Img: data.Img,
-      Ingridents: mappedIngredients,
+      Ingredients: mappedIngredients, // כאן התבצע התיקון
     };
 
     try {
@@ -180,9 +180,9 @@ const AddRecipeForm = () => {
                     defaultValue=""
                     {...register("Difficulty")}
                   >
-                    <MenuItem value="קל">קל</MenuItem>
-                    <MenuItem value="בינוני">בינוני</MenuItem>
-                    <MenuItem value="קשה">קשה</MenuItem>
+                    <MenuItem value="קל">1</MenuItem>
+                    <MenuItem value="בינוני">2</MenuItem>
+                    <MenuItem value="קשה">3</MenuItem>
                   </Select>
                 </FormControl>
                 {errors.Difficulty && (

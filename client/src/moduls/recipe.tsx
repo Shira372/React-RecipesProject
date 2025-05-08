@@ -6,7 +6,7 @@ export type Rec = {
     Name: string;
     Img: string;
     Duration: number;
-    Difficulty: number;//string?
+    Difficulty: number;
     Description: string;
     Category: number;
     Instructions: Instructions[];  
